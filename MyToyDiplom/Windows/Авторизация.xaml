@@ -1,0 +1,29 @@
+﻿<Window x:Class="MyToyDiplom.Авторизация"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:MyToyDiplom"
+        mc:Ignorable="d"
+        Title="Авторизация" Background="AliceBlue" FontSize="20" Width="400" ResizeMode="NoResize" SizeToContent="Height" Activated="Window_Activated">
+    <StackPanel x:Name="stackPanel">
+        <Label>Пользователь</Label>
+        <TextBox x:Name="Login"></TextBox>
+        <Label>Пароль</Label>
+        <PasswordBox x:Name="Password" PasswordChar="*"></PasswordBox>
+        <Grid x:Name="Grid" Visibility="Collapsed">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBlock x:Name="Caprcha" Background="Gray" FontSize="28" Grid.Row="0" TextAlignment="Center"></TextBlock>
+            <Line x:Name="line" Grid.Row="0" Stroke="Black"></Line>
+            <TextBox x:Name="tbCaptcha" Grid.Row="1"></TextBox>
+        </Grid>
+        <Button Content="Войти" Background="CadetBlue" IsDefault="True" Click="OnEnterButtonClick"></Button>
+        <Button Content="Отмена" Background="CadetBlue" IsCancel="True" Click="EscClick"/>
+        <Button Content="Войти как покупатель" Background="CadetBlue" Click="GuestClick"></Button>
+        <Label>Нет Аккаунта? Тогда зарегестрируйся!</Label>
+        <Button Content="Регистрация" Background="CadetBlue" IsCancel="True" Click="RegisClick"/>
+    </StackPanel>
+</Window>

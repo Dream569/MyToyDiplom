@@ -13,29 +13,25 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace MyToyDiplom.Windows
+namespace MyToyDiplom.WindowAddEditPage
 {
     /// <summary>
-    /// Логика взаимодействия для Регистрация.xaml
+    /// Логика взаимодействия для SupplierAddEdit.xaml
     /// </summary>
-    public partial class Регистрация : Window
+    public partial class SupplierAddEdit : Window
     {
-        
-        public Регистрация()
+        public SupplierAddEdit()
         {
             InitializeComponent();
         }
         MyToyContext _db = new MyToyContext();
-        User _Us;
+        Supplier _Suplr;
 
         private void RegistrationClick(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-            if (Surn.Text.Length == 0) errors.AppendLine("Введите фамилию");
-            if (Nam.Text.Length == 0) errors.AppendLine("Введите имя");
-            if (LasNam.Text.Length == 0) errors.AppendLine("Введите отчество");
-            if (Log.Text.Length == 0) errors.AppendLine("Введите логин");
-            if (Pas.Text.Length == 0) errors.AppendLine("Введите пароль");
+            if (SupNam.Text.Length == 0) errors.AppendLine("Введите имя поставщика");
+
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
@@ -43,9 +39,9 @@ namespace MyToyDiplom.Windows
             }
             try
             {
-                if (Data.Use == null)
+                if (Data.Supl == null)
                 {
-                    _db.Users.Add(_Us);
+                    _db.Suppliers.Add(_Suplr);
                     _db.SaveChanges();
                 }
                 else
@@ -62,24 +58,23 @@ namespace MyToyDiplom.Windows
         }
         private void CanselClick(object sender, RoutedEventArgs e)
         {
-            Close();
-            Data.Use = null;
-            Авторизация f = new Авторизация();
-            f.ShowDialog();
+            this.Close();
         }
         private void Window_Loaded3(object sender, RoutedEventArgs e)
         {
-            Rol.ItemsSource = _db.Roles.ToList();
-            Rol.DisplayMemberPath = "RoleName";
-            Rol.SelectedValuePath = "Id";
-            Rol.SelectedIndex = 3;
-            if (Data.Use == null)
+            if (Data.Supl == null)
             {
-                WindowAddEdit.Title = "Регистрация";
-                RegBut.Content = "Зарегистрироваться";
-                _Us = new User();
+                WindowAddEdit.Title = "Добавление записи";
+                RegBut.Content = "Добавить поставщика";
+                _Suplr = new Supplier();
             }
-            WindowAddEdit.DataContext = _Us;
+            else
+            {
+                WindowAddEdit.Title = "Изменение записи";
+                RegBut.Content = "Изменить поставщика";
+                _Suplr = _db.Suppliers.Find(Data.Supl.Id);
+            }
+            WindowAddEdit.DataContext = _Suplr;
         }
     }
 }

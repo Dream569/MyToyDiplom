@@ -6,6 +6,35 @@
         xmlns:local="clr-namespace:MyToyDiplom"
         mc:Ignorable="d"
         Title="Авторизация" Background="AliceBlue" FontSize="20" Width="400" ResizeMode="NoResize" SizeToContent="Height" Activated="Window_Activated">
+    <Window.Resources>
+        <Style x:Key="MainButtonStyle" TargetType="Button">
+        <Setter Property="Background" Value="#FF4CAF50"/>
+        <Setter Property="Foreground" Value="White"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="FontWeight" Value="Bold"/>
+        <Setter Property="Padding" Value="10,5"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Background="{TemplateBinding Background}" 
+                                CornerRadius="5">
+                        <ContentPresenter HorizontalAlignment="Center" 
+                                              VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF388E3C"/>
+            </Trigger>
+        </Style.Triggers>
+        </Style>
+    </Window.Resources>
+    
     <StackPanel x:Name="stackPanel">
         <Label>Пользователь</Label>
         <TextBox x:Name="Login"></TextBox>
@@ -20,10 +49,10 @@
             <Line x:Name="line" Grid.Row="0" Stroke="Black"></Line>
             <TextBox x:Name="tbCaptcha" Grid.Row="1"></TextBox>
         </Grid>
-        <Button Content="Войти" Background="CadetBlue" IsDefault="True" Click="OnEnterButtonClick"></Button>
-        <Button Content="Отмена" Background="CadetBlue" IsCancel="True" Click="EscClick"/>
-        <Button Content="Войти как покупатель" Background="CadetBlue" Click="GuestClick"></Button>
-        <Label>Нет Аккаунта? Тогда зарегестрируйся!</Label>
-        <Button Content="Регистрация" Background="CadetBlue" IsCancel="True" Click="RegisClick"/>
+        <Button Content="Войти" IsDefault="True" Style="{StaticResource MainButtonStyle}" Click="OnEnterButtonClick"></Button>
+        <Button Content="Отмена" IsCancel="True" Style="{StaticResource MainButtonStyle}" Click="EscClick"/>
+        <Button Content="Войти как клиент" IsCancel="True" Style="{StaticResource MainButtonStyle}" Click="GuestClick"/>
+        <Label>Нет Аккаунта?</Label>
+        <Button Content="Регистрация" Style="{StaticResource MainButtonStyle}" IsCancel="True" Click="RegisClick"/>
     </StackPanel>
 </Window>

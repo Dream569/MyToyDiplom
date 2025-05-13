@@ -110,11 +110,9 @@ namespace MyToyDiplom
         }
         private void RegisClick(object sender, RoutedEventArgs e)
         {
-            Data.Use = null;
-            Регистрация f = new Регистрация();
-            f.Owner = this;
-            f.ShowDialog();
             this.Close();
+            Регистрация f = new Регистрация();
+            f.ShowDialog();
         }
     }
 }

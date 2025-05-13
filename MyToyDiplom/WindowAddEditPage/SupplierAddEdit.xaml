@@ -1,11 +1,11 @@
-﻿<Window x:Class="MyToyDiplom.Windows.Регистрация"
+﻿<Window x:Class="MyToyDiplom.WindowAddEditPage.SupplierAddEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:MyToyDiplom.Windows"
+        xmlns:local="clr-namespace:MyToyDiplom.WindowAddEditPage"
         mc:Ignorable="d"
-        Title="Регистрация" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" SizeToContent="Height" FontSize="20" Width="400">
+        Title="SupplierAddEdit" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Width="400">
     <Window.Resources>
         <Style x:Key="MainButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF4CAF50"/>
@@ -20,9 +20,9 @@
                 <Setter.Value>
                     <ControlTemplate TargetType="Button">
                         <Border Background="{TemplateBinding Background}" 
-                            CornerRadius="5">
+                        CornerRadius="5">
                             <ContentPresenter HorizontalAlignment="Center" 
-                                          VerticalAlignment="Center"/>
+                                      VerticalAlignment="Center"/>
                         </Border>
                     </ControlTemplate>
                 </Setter.Value>
@@ -35,19 +35,13 @@
         </Style>
     </Window.Resources>
     <StackPanel>
-        <Label>Фамилия</Label>
-        <TextBox x:Name="Surn" Text="{Binding Path=Surname}"></TextBox>
-        <Label>Имя</Label>
-        <TextBox x:Name="Nam" Text="{Binding Path=Name}"></TextBox>
-        <Label>Отчество</Label>
-        <TextBox x:Name="LasNam" Text="{Binding Path=Patronymic}"></TextBox>
-        <Label>Логин</Label>
-        <TextBox x:Name="Log" Text="{Binding Path=Login}"></TextBox>
-        <Label>Пароль</Label>
-        <TextBox x:Name="Pas" Text="{Binding Path=Password}"></TextBox>
-        <Label>Роль</Label>
-        <ComboBox x:Name="Rol" Text="{Binding Path=UserRole}"></ComboBox>
-        <Button Content="Зарегестрироваться" Style="{StaticResource MainButtonStyle}" x:Name="RegBut" IsDefault="True" Click="RegistrationClick"></Button>
+        <Label>Имя поставщика</Label>
+        <TextBox x:Name="SupNam" Text="{Binding Path=SupplierName}"></TextBox>
+        <Label>Адрес</Label>
+        <TextBox x:Name="Adres" Text="{Binding Path=Address}"></TextBox>
+        <Label>Телефон</Label>
+        <TextBox x:Name="Telep" Text="{Binding Path=Phone}"></TextBox>
+        <Button Content="Добавить" Style="{StaticResource MainButtonStyle}" x:Name="RegBut" IsDefault="True" Click="RegistrationClick"></Button>
         <Button Content="Отмена" Style="{StaticResource MainButtonStyle}" IsDefault="True" Click="CanselClick"></Button>
     </StackPanel>
 </Window>

@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -12,30 +13,29 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace MyToyDiplom.Windows
+namespace MyToyDiplom.WindowAddEditPage
 {
     /// <summary>
-    /// Логика взаимодействия для Регистрация.xaml
+    /// Логика взаимодействия для SupplyAddEdit.xaml
     /// </summary>
-    public partial class Регистрация : Window
+    public partial class SupplyAddEdit : Window
     {
-        
-        public Регистрация()
+        public SupplyAddEdit()
         {
             InitializeComponent();
         }
         MyToyContext _db = new MyToyContext();
-        User _Us;
+        Supply _Sup;
 
         private void RegistrationClick(object sender, RoutedEventArgs e)
         {
             StringBuilder errors = new StringBuilder();
-            if (Surn.Text.Length == 0) errors.AppendLine("Введите фамилию");
-            if (Nam.Text.Length == 0) errors.AppendLine("Введите имя");
-            if (LasNam.Text.Length == 0) errors.AppendLine("Введите отчество");
-            if (Log.Text.Length == 0) errors.AppendLine("Введите логин");
-            if (Pas.Text.Length == 0) errors.AppendLine("Введите пароль");
+            if (IdToy.Text.Length == 0) errors.AppendLine("Введите код товара");
+            if (Dat.SelectedDate == null) errors.AppendLine("Укажите дату");
+            if (Coun.Text.Length == 0) errors.AppendLine("Введите колличество");
+            
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
@@ -43,9 +43,9 @@ namespace MyToyDiplom.Windows
             }
             try
             {
-                if (Data.Use == null)
+                if (Data.Supply == null)
                 {
-                    _db.Users.Add(_Us);
+                    _db.Supplies.Add(_Sup);
                     _db.SaveChanges();
                 }
                 else
@@ -62,24 +62,25 @@ namespace MyToyDiplom.Windows
         }
         private void CanselClick(object sender, RoutedEventArgs e)
         {
-            Close();
-            Data.Use = null;
-            Авторизация f = new Авторизация();
-            f.ShowDialog();
+            this.Close();
         }
         private void Window_Loaded3(object sender, RoutedEventArgs e)
         {
-            Rol.ItemsSource = _db.Roles.ToList();
-            Rol.DisplayMemberPath = "RoleName";
-            Rol.SelectedValuePath = "Id";
-            Rol.SelectedIndex = 3;
-            if (Data.Use == null)
+            IdToy.ItemsSource = _db.Toys.ToList();
+            IdToy.DisplayMemberPath = "Id";
+            if (Data.Supply == null)
             {
-                WindowAddEdit.Title = "Регистрация";
-                RegBut.Content = "Зарегистрироваться";
-                _Us = new User();
+                WindowAddEdit.Title = "Добавление записи";
+                RegBut.Content = "Добавить поставщика";
+                _Sup = new Supply();
             }
-            WindowAddEdit.DataContext = _Us;
+            else
+            {
+                WindowAddEdit.Title = "Изменение записи";
+                RegBut.Content = "Изменить поставщика";
+                _Sup = _db.Supplies.Find(Data.Supply.Id);
+            }
+            WindowAddEdit.DataContext = _Sup;
         }
     }
 }

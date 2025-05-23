@@ -36,6 +36,10 @@ namespace MyToyDiplom.Windows
             if (LasNam.Text.Length == 0) errors.AppendLine("Введите отчество");
             if (Log.Text.Length == 0) errors.AppendLine("Введите логин");
             if (Pas.Text.Length == 0) errors.AppendLine("Введите пароль");
+
+            var p = _db.Users.Where(p => p.Login == Log.Text);
+            if (p.Count() > 0) errors.AppendLine("Такой логин уже существует");
+
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
@@ -45,6 +49,7 @@ namespace MyToyDiplom.Windows
             {
                 if (Data.Use == null)
                 {
+                    _Us.UserRole = 3;
                     _db.Users.Add(_Us);
                     _db.SaveChanges();
                 }
@@ -52,7 +57,10 @@ namespace MyToyDiplom.Windows
                 {
                     _db.SaveChanges();
                 }
-                this.Close();
+                Close();
+                Data.Use = null;
+                Авторизация f = new Авторизация();
+                f.ShowDialog();
 
             }
             catch (Exception ex)
@@ -69,10 +77,10 @@ namespace MyToyDiplom.Windows
         }
         private void Window_Loaded3(object sender, RoutedEventArgs e)
         {
-            Rol.ItemsSource = _db.Roles.ToList();
-            Rol.DisplayMemberPath = "RoleName";
-            Rol.SelectedValuePath = "Id";
-            Rol.SelectedIndex = 3;
+            //Rol.ItemsSource = _db.Roles.ToList();
+            //Rol.DisplayMemberPath = "Id";
+            //Rol.SelectedValuePath = "RoleName";
+            //Rol.SelectedIndex = 3;
             if (Data.Use == null)
             {
                 WindowAddEdit.Title = "Регистрация";

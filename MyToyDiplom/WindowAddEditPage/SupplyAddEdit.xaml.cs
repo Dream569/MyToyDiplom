@@ -45,11 +45,19 @@ namespace MyToyDiplom.WindowAddEditPage
             {
                 if (Data.Supply == null)
                 {
+                    _Sup.CountSup = int.Parse(Coun.Text);
+                    _Sup.ToyId = int.Parse(IdToy.Text);
+                    DateTime selectedDateTime = Dat.SelectedDate.Value;
+                    _Sup.Date = selectedDateTime;
                     _db.Supplies.Add(_Sup);
                     _db.SaveChanges();
                 }
                 else
                 {
+                    _Sup.CountSup = int.Parse(Coun.Text);
+                    _Sup.ToyId = int.Parse(IdToy.Text);
+                    DateTime selectedDateTime = Dat.SelectedDate.Value;
+                    _Sup.Date = selectedDateTime;
                     _db.SaveChanges();
                 }
                 this.Close();
@@ -67,18 +75,19 @@ namespace MyToyDiplom.WindowAddEditPage
         private void Window_Loaded3(object sender, RoutedEventArgs e)
         {
             IdToy.ItemsSource = _db.Toys.ToList();
-            IdToy.DisplayMemberPath = "Id";
+            IdToy.SelectedValuePath = "Id";
+            IdToy.DisplayMemberPath = "Name";
             if (Data.Supply == null)
             {
                 WindowAddEdit.Title = "Добавление записи";
-                RegBut.Content = "Добавить поставщика";
+                RegBut.Content = "Добавить поставку";
                 _Sup = new Supply();
             }
             else
             {
                 WindowAddEdit.Title = "Изменение записи";
-                RegBut.Content = "Изменить поставщика";
-                _Sup = _db.Supplies.Find(Data.Supply.Id);
+                RegBut.Content = "Изменить поставку";
+                _Sup = _db.Supplies.Find(Data.Supply.IdSup);
             }
             WindowAddEdit.DataContext = _Sup;
         }

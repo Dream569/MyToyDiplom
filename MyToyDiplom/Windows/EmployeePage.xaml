@@ -76,42 +76,36 @@
                 </Grid.ColumnDefinitions>
             </Grid>
         </Border>
-
-        
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="Добавить сотрудника" Click="AddButton_Click" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Изменить сотрудника" ToolTip="Редактировать" Click="EditButton_Click" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Удалить сотрудника" ToolTip="Удалить" Click="DeleteButton_Click" Style="{StaticResource MainButtonStyle}"/>
         </StackPanel>
-
-        
         <ListView x:Name="EmployesListView" Grid.Row="2" Margin="10" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False" ItemsSource="{Binding Employee}">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <Border Margin="10" Padding="10" Background="White" BorderBrush="LightGray" BorderThickness="1" CornerRadius="10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="550" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto" />
-
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
-                            <StackPanel Grid.Column="0">
-                            <Image Width="100" Height="100" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Stretch="Fill" HorizontalAlignment="Center" Margin="10" Source="{Binding PhotoFull}"></Image>
-                                <TextBlock Text="{Binding Path=EmpoleeId}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=FirstName}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=LastName}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=BirthdayDate}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=Adress}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=City}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=Country}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=Phone}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Border HorizontalAlignment="Stretch" BorderThickness="2" BorderBrush="#FF2196F3" Margin="10" Width="250" Height="250" CornerRadius="10">
+                                <Image Grid.Column="0"  Margin="10" Stretch="Fill" HorizontalAlignment="Stretch" Source="{Binding PhotoFull2}"></Image>
+                            </Border>
+                            <StackPanel Grid.Column="1">
+                                <TextBlock Text="{Binding Path=FirstName, StringFormat={}Фамилия: {0}}" Margin="0,5,0,0" FontSize="16" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=LastName, StringFormat={}Имя: {0}}" Margin="0,5,0,0" FontSize="16" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=BirthdayDate, StringFormat={}Дата Рождения: {0:d}}" Margin="0,5,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=Adress, StringFormat={}Адрес: {0}}" Margin="0,5,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=City, StringFormat={}Город: {0}}" Margin="0,5,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=Country, StringFormat={}Страна: {0}}" Margin="0,5,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=Phone, StringFormat={}Телефон: {0}}" Margin="0,5,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
                             </StackPanel>
-                            
-                            <Button Content="✏️" ToolTip="Редактировать" Click="EditButton_Click" 
-                     Tag="{Binding EmpoleeId}" Style="{StaticResource MainButtonStyle}" Grid.Column="1" Width="140" Height="25" Margin="10,0,0,0" HorizontalAlignment="Right"/>
-                            <Button Content="🗑️" ToolTip="Удалить" Click="DeleteButton_Click" 
-                     Tag="{Binding EmpoleeId}" Style="{StaticResource MainButtonStyle}" Grid.Column="2" Width="140" Height="25" Margin="10,0,0,0" HorizontalAlignment="Right"/>
-                            
                         </Grid>
                     </Border>
                 </DataTemplate>

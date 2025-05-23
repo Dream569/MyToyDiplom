@@ -99,15 +99,7 @@ namespace MyToyDiplom
         {
             Close();
         }
-        private void GuestClick(object sender, RoutedEventArgs e)
-        {
-            Data.login = true;
-            Data.UserSurname = "Гость";
-            Data.UserName = "";
-            Data.UserPatrononymic = "";
-            Data.Right = "клиент";
-            Close();
-        }
+        
         private void RegisClick(object sender, RoutedEventArgs e)
         {
             this.Close();

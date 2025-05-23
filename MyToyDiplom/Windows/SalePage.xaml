@@ -80,33 +80,24 @@
         
         <StackPanel Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Right" Margin="10">
             <Button Content="Добавить продажу" Click="AddButton_Click" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Изменить продажу" ToolTip="Редактировать" Click="EditButton_Click" Style="{StaticResource MainButtonStyle}"/>
+            <Button Content="Удалить продажу" ToolTip="Удалить" Click="DeleteButton_Click" Style="{StaticResource MainButtonStyle}"/>
         </StackPanel>
 
         
-        <ListView x:Name="SalesListView" Grid.Row="2" Margin="10" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False" ItemsSource="{Binding Sale}">
+        <ListView x:Name="SalesListView" Grid.Row="2" Margin="10" HorizontalContentAlignment="Stretch" ScrollViewer.CanContentScroll="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <Border Margin="10" Padding="10" Background="White" BorderBrush="LightGray" BorderThickness="1" CornerRadius="10">
+                    <Border Margin="10" Padding="10" Background="White" BorderBrush="Black" BorderThickness="1" CornerRadius="10">
                         <Grid>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="550" />
-                                <ColumnDefinition Width="auto" />
-                                <ColumnDefinition Width="auto" />
-
+                                <ColumnDefinition Width="2*" />
                             </Grid.ColumnDefinitions>
                             <StackPanel Grid.Column="0">
-                                <TextBlock Text="{Binding Path=Id}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=ToyId}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=Date}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                <TextBlock Text="{Binding Path=Count}" FontSize="16" FontWeight="Bold"></TextBlock>
-                                
+                                <TextBlock Text="{Binding Path=Toy.Name, StringFormat={}Название товара: {0}}" Margin="0,5,0,0" FontSize="16" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=Date, StringFormat={}Дата продажи: {0:d}}" Margin="0,5,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
+                                <TextBlock Text="{Binding Path=CountSal, StringFormat={}Продано: {0}}" Margin="0,5,0,0" FontSize="14" FontWeight="Bold"></TextBlock>
                             </StackPanel>
-                            
-                            <Button Content="✏️" ToolTip="Редактировать" Click="EditButton_Click" 
-                     Tag="{Binding Id}" Style="{StaticResource MainButtonStyle}" Grid.Column="1" Width="140" Height="25" Margin="10,0,0,0" HorizontalAlignment="Right"/>
-                            <Button Content="🗑️" ToolTip="Удалить" Click="DeleteButton_Click" 
-                     Tag="{Binding Id}" Style="{StaticResource MainButtonStyle}" Grid.Column="2" Width="140" Height="25" Margin="10,0,0,0" HorizontalAlignment="Right"/>
-                            
                         </Grid>
                     </Border>
                 </DataTemplate>

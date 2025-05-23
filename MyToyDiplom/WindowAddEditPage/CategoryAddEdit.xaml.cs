@@ -1,4 +1,5 @@
-﻿using MyToyDiplom.DataBase;
+﻿using Microsoft.VisualBasic.Logging;
+using MyToyDiplom.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -32,6 +33,9 @@ namespace MyToyDiplom.WindowAddEditPage
             StringBuilder errors = new StringBuilder();
             if (Cat.Text.Length == 0) errors.AppendLine("Введите категорию");
 
+            var p = _db.Categories.Where(p => p.Name == Cat.Text);
+            if (p.Count() > 0) errors.AppendLine("Такая категория уже существует");
+
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());
@@ -63,7 +67,7 @@ namespace MyToyDiplom.WindowAddEditPage
         private void Window_Loaded3(object sender, RoutedEventArgs e)
         {
 
-            if (Data.Employ == null)
+            if (Data.Cater == null)
             {
                 WindowAddEdit.Title = "Добавление записи";
                 RegBut.Content = "Добавить категорию";

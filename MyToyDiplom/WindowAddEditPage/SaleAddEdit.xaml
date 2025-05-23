@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyToyDiplom.WindowAddEditPage"
         mc:Ignorable="d"
-        Title="SaleAddEdit" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Width="400">
+        Title="SaleAddEdit" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" SizeToContent="Height" FontSize="20" Width="400">
     <Window.Resources>
         <Style x:Key="MainButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF4CAF50"/>
@@ -36,11 +36,11 @@
     </Window.Resources>
     <StackPanel>
         <Label>Код Игрушки</Label>
-        <ComboBox x:Name="IdToy" Text="{Binding Path=ToyId}"></ComboBox>
+        <ComboBox x:Name="IdToy" SelectedItem="{Binding Path=Toy}"></ComboBox>
         <Label>Дата</Label>
-        <DatePicker x:Name="Dat" Text="{Binding Path=Date}"></DatePicker>
+        <DatePicker x:Name="Dat" Text="{Binding Path=Date, StringFormat=d}"></DatePicker>
         <Label>Продано</Label>
-        <TextBox x:Name="Coun" Text="{Binding Path=Count}"></TextBox>
+        <TextBox x:Name="Coun" Text="{Binding Path=CountSal}"></TextBox>
         <Button Content="Добавить" Style="{StaticResource MainButtonStyle}" x:Name="RegBut" IsDefault="True" Click="RegistrationClick"></Button>
         <Button Content="Отмена" Style="{StaticResource MainButtonStyle}" IsDefault="True" Click="CanselClick"></Button>
     </StackPanel>

@@ -1,4 +1,5 @@
-﻿using MyToyDiplom.DataBase;
+﻿using Microsoft.VisualBasic.Logging;
+using MyToyDiplom.DataBase;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +32,9 @@ namespace MyToyDiplom.WindowAddEditPage
         {
             StringBuilder errors = new StringBuilder();
             if (SupNam.Text.Length == 0) errors.AppendLine("Введите имя поставщика");
+
+            var p = _db.Suppliers.Where(p => p.Phone == int.Parse(Telep.Text));
+            if (p.Count() > 0) errors.AppendLine("Такой телефон уже существует");
 
             if (errors.Length > 0)
             {

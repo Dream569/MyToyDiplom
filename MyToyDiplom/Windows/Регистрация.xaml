@@ -45,8 +45,8 @@
         <TextBox x:Name="Log" Text="{Binding Path=Login}"></TextBox>
         <Label>Пароль</Label>
         <TextBox x:Name="Pas" Text="{Binding Path=Password}"></TextBox>
-        <Label>Роль</Label>
-        <ComboBox x:Name="Rol" Text="{Binding Path=UserRole}"></ComboBox>
+        <!--<Label>Роль</Label>
+        <ComboBox x:Name="Rol" Text="{Binding Path=UserRole}"></ComboBox>-->
         <Button Content="Зарегестрироваться" Style="{StaticResource MainButtonStyle}" x:Name="RegBut" IsDefault="True" Click="RegistrationClick"></Button>
         <Button Content="Отмена" Style="{StaticResource MainButtonStyle}" IsDefault="True" Click="CanselClick"></Button>
     </StackPanel>

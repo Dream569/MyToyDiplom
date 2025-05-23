@@ -69,6 +69,8 @@ public partial class MyToyContext : DbContext
 
         modelBuilder.Entity<Sale>(entity =>
         {
+            entity.HasKey(e => e.IdSal);
+
             entity.Property(e => e.Date).HasColumnType("datetime");
 
             entity.HasOne(d => d.Toy).WithMany(p => p.Sales)
@@ -85,6 +87,8 @@ public partial class MyToyContext : DbContext
 
         modelBuilder.Entity<Supply>(entity =>
         {
+            entity.HasKey(e => e.IdSup);
+
             entity.Property(e => e.Date).HasColumnType("datetime");
 
             entity.HasOne(d => d.Toy).WithMany(p => p.Supplies)

@@ -44,11 +44,19 @@ namespace MyToyDiplom.WindowAddEditPage
             {
                 if (Data.Sal == null)
                 {
+                    _Sal.CountSal = int.Parse(Coun.Text);
+                    _Sal.ToyId = int.Parse(IdToy.Text);
+                    DateTime selectedDateTime = Dat.SelectedDate.Value;
+                    _Sal.Date = selectedDateTime;
                     _db.Sales.Add(_Sal);
                     _db.SaveChanges();
                 }
                 else
                 {
+                    _Sal.CountSal = int.Parse(Coun.Text);
+                    _Sal.ToyId = int.Parse(IdToy.Text);
+                    DateTime selectedDateTime = Dat.SelectedDate.Value;
+                    _Sal.Date = selectedDateTime;
                     _db.SaveChanges();
                 }
                 this.Close();
@@ -66,8 +74,8 @@ namespace MyToyDiplom.WindowAddEditPage
         private void Window_Loaded3(object sender, RoutedEventArgs e)
         {
             IdToy.ItemsSource = _db.Toys.ToList();
-            IdToy.DisplayMemberPath = "Id";
-            
+            IdToy.SelectedValuePath = "Id";
+            IdToy.DisplayMemberPath = "Name";
             if (Data.Sal == null)
             {
                 WindowAddEdit.Title = "Добавление записи";
@@ -78,7 +86,7 @@ namespace MyToyDiplom.WindowAddEditPage
             {
                 WindowAddEdit.Title = "Изменение записи";
                 RegBut.Content = "Изменить продажу";
-                _Sal = _db.Sales.Find(Data.Sal.Id);
+                _Sal = _db.Sales.Find(Data.Sal.IdSal);
             }
             WindowAddEdit.DataContext = _Sal;
         }

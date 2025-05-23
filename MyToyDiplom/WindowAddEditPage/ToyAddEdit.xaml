@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyToyDiplom.WindowAddEditPage"
         mc:Ignorable="d"
-            Title="ToyAddEdit" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Width="400">
+            Title="ToyAddEdit" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" SizeToContent="Height" FontSize="20" Width="600">
     <Window.Resources>
         <Style x:Key="MainButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF4CAF50"/>
@@ -34,18 +34,30 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+    <StackPanel Grid.Column="0">
         <Label>Название игрушки</Label>
         <TextBox x:Name="ToyNam" Text="{Binding Path=Name}"></TextBox>
         <Label>Описание игрушки</Label>
         <TextBox x:Name="TpyOpis" Text="{Binding Path=Description}"></TextBox>
-        <Label>Код Игрушки</Label>
+        <Label>Цена</Label>
         <TextBox x:Name="PriceToy" Text="{Binding Path=Price}"></TextBox>
         <Label>Код категории</Label>
-        <ComboBox x:Name="IdCat" Text="{Binding Path=CategoryId}"></ComboBox>
+        <ComboBox x:Name="IdCat" SelectedItem="{Binding Path=Category}"></ComboBox>
         <Label>Код поставщика</Label>
-        <ComboBox x:Name="IdSup" Text="{Binding Path=SupplierId}"></ComboBox>
+        <ComboBox x:Name="IdSup" SelectedItem="{Binding Path=Supplier}"></ComboBox>
         <Button Content="Добавить" Style="{StaticResource MainButtonStyle}" x:Name="RegBut" IsDefault="True" Click="RegistrationClick"></Button>
         <Button Content="Отмена" Style="{StaticResource MainButtonStyle}" IsDefault="True" Click="CanselClick"></Button>
     </StackPanel>
+        <StackPanel Grid.Column="1">
+        <Label>Изображение</Label>
+        <Image x:Name="Photo" Stretch="Fill" Source="{Binding PhotoFull}"/>
+        <Button Content="Добавить изображение" Style="{StaticResource MainButtonStyle}" x:Name="PhotBut" IsDefault="True" Click="AddPhoto"></Button>
+            
+        </StackPanel>
+    </Grid>
 </Window>

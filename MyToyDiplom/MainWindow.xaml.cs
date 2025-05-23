@@ -20,11 +20,58 @@ namespace MyToyDiplom
     /// </summary>
     public partial class MainWindow : Window
     {
+        private readonly List<string> _promoImages = new List<string>
+        {
+            "C:\\Users\\user\\source\\repos\\MyToyDiplom\\MyToyDiplom\\Images\\wTZRavfdZZk.jpg",
+            "C:\\Users\\user\\source\\repos\\MyToyDiplom\\MyToyDiplom\\Images\\-d08Jq9NNkg.jpg",
+            "C:\\Users\\user\\source\\repos\\MyToyDiplom\\MyToyDiplom\\Images\\0tjOXC6QL60.jpg"
+        };
+
+        private int _currentPromoIndex = 0;
+        private readonly DispatcherTimer _promoTimer = new DispatcherTimer();
+        private readonly DispatcherTimer _clockTimer = new DispatcherTimer();
+
+        public DateTime CurrentDateTime => DateTime.Now;
+
+        private void PromoTimer_Tick(object sender, EventArgs e)
+        {
+            _currentPromoIndex = (_currentPromoIndex + 1) % _promoImages.Count;
+            LoadPromoImage();
+        }
+
+        private void LoadPromoImage()
+        {
+            try
+            {
+                var uri = new Uri(_promoImages[_currentPromoIndex], UriKind.Absolute);
+                PromoImage.Source = new BitmapImage(uri);
+            }
+            catch
+            {
+                // В случае ошибки загрузки изображения
+                PromoImage.Source = new BitmapImage(new Uri("C:\\Users\\user\\source\\repos\\MyToyDiplom\\MyToyDiplom\\Images\\wTZRavfdZZk.jpg"));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
-            
+            DataContext = this;
+
+            // Настройка таймера для смены рекламных изображений
+            _promoTimer.Interval = TimeSpan.FromSeconds(5);
+            _promoTimer.Tick += PromoTimer_Tick;
+            _promoTimer.Start();
+
+            // Настройка таймера для обновления времени
+            _clockTimer.Interval = TimeSpan.FromSeconds(1);
+            _clockTimer.Tick += (s, e) => OnPropertyChanged(nameof(CurrentDateTime));
+            _clockTimer.Start();
+
+            // Загрузка первого изображения
+            LoadPromoImage();
         }
+
         private void Window_Initialized(object sender, EventArgs e)
         {
             Авторизация f = new Авторизация();
@@ -112,15 +159,15 @@ namespace MyToyDiplom
             f.ShowDialog();
         }
 
-        private void AuthButton_Click(object sender, RoutedEventArgs e)
+        private void ExitClick(object sender, RoutedEventArgs e)
         {
-            Авторизация f = new Авторизация();
-            f.ShowDialog();
+            this.Close();
         }
 
         private void CartButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Work in progress", "Work in progress", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            BasketPage f = new BasketPage();
+            f.ShowDialog();
         }
 
         public event EventHandler PropertyChanged;

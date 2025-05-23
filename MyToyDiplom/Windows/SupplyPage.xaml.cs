@@ -1,4 +1,5 @@
-﻿using MyToyDiplom.DataBase;
+﻿using Microsoft.EntityFrameworkCore;
+using MyToyDiplom.DataBase;
 using MyToyDiplom.WindowAddEditPage;
 using System;
 using System.Collections.Generic;
@@ -30,7 +31,7 @@ namespace MyToyDiplom.Windows
             using (MyToyContext _db = new MyToyContext())
             {
                 int selectedIndex = SupplyListView.SelectedIndex;
-                SupplyListView.ItemsSource = _db.Supplies.ToList();
+                SupplyListView.ItemsSource = _db.Supplies.Include(t => t.Toy).ToList();
                 if (selectedIndex != -1)
                 {
                     if (selectedIndex == SupplyListView.Items.Count) selectedIndex--;

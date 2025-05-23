@@ -51,7 +51,7 @@
         </Grid>
         <Button Content="Войти" IsDefault="True" Style="{StaticResource MainButtonStyle}" Click="OnEnterButtonClick"></Button>
         <Button Content="Отмена" IsCancel="True" Style="{StaticResource MainButtonStyle}" Click="EscClick"/>
-        <Button Content="Войти как клиент" IsCancel="True" Style="{StaticResource MainButtonStyle}" Click="GuestClick"/>
+        
         <Label>Нет Аккаунта?</Label>
         <Button Content="Регистрация" Style="{StaticResource MainButtonStyle}" IsCancel="True" Click="RegisClick"/>
     </StackPanel>

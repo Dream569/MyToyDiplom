@@ -34,6 +34,9 @@ namespace MyToyDiplom.WindowAddEditPage
             
             if (TimDev.Text.Length == 0) errors.AppendLine("Введите время доставки");
 
+            var p = _db.Providers.Where(p => p.ProviderName == ProvNam.Text);
+            if (p.Count() > 0) errors.AppendLine("Такая доставка уже существует");
+
             if (errors.Length > 0)
             {
                 MessageBox.Show(errors.ToString());

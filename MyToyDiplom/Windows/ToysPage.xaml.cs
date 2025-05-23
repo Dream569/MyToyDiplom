@@ -1,4 +1,6 @@
-﻿using MyToyDiplom.DataBase;
+﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
+using MyToyDiplom.DataBase;
 using MyToyDiplom.WindowAddEditPage;
 using System;
 using System.Collections;
@@ -59,7 +61,7 @@ namespace MyToyDiplom.Windows
             using (MyToyContext _db = new MyToyContext())
             {
                 int selectedIndex = ProductsListView.SelectedIndex;
-                ProductsListView.ItemsSource = _db.Toys.ToList();
+                ProductsListView.ItemsSource = _db.Toys.Include(t => t.Supplier).Include(c => c.Category).ToList();
                 if (selectedIndex != -1)
                 {
                     if (selectedIndex == ProductsListView.Items.Count) selectedIndex--;
@@ -124,7 +126,23 @@ namespace MyToyDiplom.Windows
         }
         private void ResetFiltersButton_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Work in progress", "Work in progress", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            SearchTextBox.Clear();
+        }
+
+        private void SearchTextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (SearchTextBox.Text.IsNullOrEmpty() == false)
+            {
+                using (MyToyContext _db = new MyToyContext())
+                {
+                    var filtered = _db.Toys.Where(p => p.Name.Contains(SearchTextBox.Text));
+                    ProductsListView.ItemsSource = filtered.ToList();
+                }
+            }
+            else
+            {
+                LoadDBIListView();
+            }
         }
     }
 }

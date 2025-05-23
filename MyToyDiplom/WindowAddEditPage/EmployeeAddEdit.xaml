@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyToyDiplom.WindowAddEditPage"
         mc:Ignorable="d"
-        Title="EmployeeAddEdit" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" Width="400">
+        Title="EmployeeAddEdit" x:Name="WindowAddEdit" Background="AliceBlue" Loaded="Window_Loaded3" ResizeMode="NoResize" WindowStartupLocation="CenterOwner" SizeToContent="Height" FontSize="20" Width="600">
     <Window.Resources>
         <Style x:Key="MainButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF4CAF50"/>
@@ -34,13 +34,18 @@
             </Style.Triggers>
         </Style>
     </Window.Resources>
-    <StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+    <StackPanel Grid.Column="0">
         <Label>Фамилия</Label>
         <TextBox x:Name="Surn" Text="{Binding Path=FirstName}"></TextBox>
         <Label>Имя</Label>
         <TextBox x:Name="Nam" Text="{Binding Path=LastName}"></TextBox>
         <Label>Дата рождения</Label>
-        <TextBox x:Name="Buthd" Text="{Binding Path=BirthdayDate}"></TextBox>
+        <DatePicker x:Name="Buthd" Text="{Binding Path=BirthdayDate, StringFormat=d}"></DatePicker>
         <Label>Адрес</Label>
         <TextBox x:Name="Adres" Text="{Binding Path=Adress}"></TextBox>
         <Label>Город</Label>
@@ -48,10 +53,14 @@
         <Label>Страна</Label>
         <TextBox x:Name="County" Text="{Binding Path=Country}"></TextBox>
         <Label>Телефон</Label>
-        <TextBox x:Name="Tel" Text="{Binding Path=Phone}"></TextBox>
-        <Label>Фото</Label>
-        <TextBox x:Name="Phot" Text="{Binding Path=Photo}"></TextBox>
-        <Button Content="Добавить" Style="{StaticResource MainButtonStyle}" x:Name="RegBut" IsDefault="True" Click="RegistrationClick"></Button>
+            <TextBox x:Name="Tel" Text="{Binding Path=Phone}"></TextBox>
+            <Button Content="Добавить" Style="{StaticResource MainButtonStyle}" x:Name="RegBut" IsDefault="True" Click="RegistrationClick"></Button>
         <Button Content="Отмена" Style="{StaticResource MainButtonStyle}" IsDefault="True" Click="CanselClick"></Button>
     </StackPanel>
+        <StackPanel Grid.Column="1">
+            <Label>Изображение</Label>
+            <Image x:Name="Photo" Stretch="Fill" Source="{Binding PhotoFull2}"/>
+        <Button Content="Добавить изображение" Style="{StaticResource MainButtonStyle}" x:Name="PhotBut" IsDefault="True" Click="AddPhoto"></Button>
+        </StackPanel>
+    </Grid>
 </Window>

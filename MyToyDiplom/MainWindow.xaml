@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MyToyDiplom"
         mc:Ignorable="d"
-        Title="Моя Игрушка" Background="AliceBlue" WindowStartupLocation="CenterScreen" Initialized="Window_Initialized" Height="600" Width="900">
+        Title="Моя Игрушка" Background="AliceBlue" WindowStartupLocation="CenterScreen" Initialized="Window_Initialized" Height="700" Width="1000">
     <Window.Resources>
         <Style x:Key="MainButtonStyle" TargetType="Button">
             <Setter Property="Background" Value="#FF4CAF50"/>
@@ -81,9 +81,9 @@
                            HorizontalAlignment="Center"
                            Grid.Column="0"/>
                 <StackPanel Grid.Column="1" Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="AuthButton" Content="Войти" 
+                    <Button x:Name="AuthButton" Content="Выйти" 
                             Style="{StaticResource AuthButtonStyle}"
-                            Click="AuthButton_Click"
+                            Click="ExitClick"
                             Margin="0,0,10,0"/>
 
                     <Button x:Name="CartButton" Content="Корзина (0)" 
@@ -137,7 +137,7 @@
                 <!-- Рекламный баннер с автоматической сменой изображений -->
                 <Border Grid.Row="1" BorderBrush="#FFBDBDBD" BorderThickness="0,1,0,0">
                     <Grid>
-                        <Image x:Name="PromoImage" Stretch="UniformToFill"/>
+                        <Image x:Name="PromoImage" Stretch="Fill"/>
                         <TextBlock Text="Акция недели!" 
                                    HorizontalAlignment="Center" 
                                    VerticalAlignment="Top"
